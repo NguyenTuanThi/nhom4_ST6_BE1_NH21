@@ -2,6 +2,8 @@
 require "config.php";
 require "models/db.php";
 require "models/product.php";
+require "models/protype.php";
+$protype = new protype;
 $product = new Product();
 // $getAllProducts = $product->getAllProducts();
 // var_dump($getAllProducts)
@@ -185,12 +187,7 @@ $getProductById = $product->getProductById(3);
                 <!-- NAV -->
                 <ul class="main-nav nav navbar-nav">
                     <li class="active"><a href="index.php">Home</a></li>
-                    <li><a href="#">Hot Deals</a></li>
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="#">Laptops</a></li>
-                    <li><a href="#">Smartphones</a></li>
-                    <li><a href="#">Cameras</a></li>
-                    <li><a href="#">Accessories</a></li>
+
                 </ul>
                 <!-- /NAV -->
             </div>
