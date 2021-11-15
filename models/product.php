@@ -53,4 +53,30 @@ class Product extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
+    function paginate($url, $total, $perPage, $page)
+    {
+        $totalLinks = ceil($total / $perPage);
+        $link = "";
+        for ($j = 1; $j <= $totalLinks; $j++) {
+            if ($page == $j) {
+                # code...
+                $link = $link . "<li class ='active'> $j</li>";
+            } else {
+                $link = $link . "<li><a href='$url&page=$j'> $j </a></li>";
+            }
+        }
+        return $link;
+    }
+    public function searchPage($keyword, $page, $perPage)
+    {
+        $firstLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM products 
+        WHERE `name` LIKE ? LIMIT ?, ?");
+        $keyword = "%$keyword%";
+        $sql->bind_param("sss", $keyword, $firstLink, $perPage);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
 }

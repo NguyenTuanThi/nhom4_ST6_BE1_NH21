@@ -187,6 +187,7 @@ $getProductById = $product->getProductById(3);
                 <!-- NAV -->
                 <ul class="main-nav nav navbar-nav">
                     <li class="active"><a href="index.php">Home</a></li>
+                    <li><a>Phone</a></li>
 
                 </ul>
                 <!-- /NAV -->
