@@ -67,6 +67,21 @@ class Product extends Db
         }
         return $link;
     }
+
+    function paginateallproducts($url, $total, $perPage, $page)
+    {
+        $totalLinks = ceil($total / $perPage);
+        $link = "";
+        for ($j = 1; $j <= $totalLinks; $j++) {
+            if ($page == $j) {
+                # code...
+                $link = $link . "<li class ='active'> $j</li>";
+            } else {
+                $link = $link . "<li><a href='$url?page=$j'> $j </a></li>";
+            }
+        }
+        return $link;
+    }
     public function searchPage($keyword, $page, $perPage)
     {
         $firstLink = ($page - 1) * $perPage;
@@ -78,5 +93,17 @@ class Product extends Db
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
+    }
+
+    function getAllProductsForDividePage($page, $perPage)
+    {
+        // Tính số thứ tự trang bắt đầu 
+        $firstLink = ($page - 1) * $perPage;
+        //Dùng LIMIT để giới hạn số lượng hiển thị 1 trang
+        $sql = self::$connection->prepare("SELECT * FROM products LIMIT $firstLink, $perPage");
+        $sql -> execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array    
     }
 }
