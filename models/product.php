@@ -18,6 +18,65 @@ class Product extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
+    public function getProductsByType($type_id)
+    {
+        $sql = self::$connection->prepare("SELECT * FROM products WHERE type_id = ?");
+        $sql->bind_param("i", $type_id);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
+    public function get3ProductsByType($type_id, $page, $perPage)
+    {
+        // Tính số thứ tự trang bắt đầu
+        $firstLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM products
+        WHERE type_id = ? LIMIT ?, ?");
+        $sql->bind_param("iii", $type_id, $firstLink, $perPage);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
+
+    function paginate($url, $total, $perPage, $page)
+    {
+        $totalLinks = ceil($total / $perPage);
+        $link = "";
+        for ($j = 1; $j <= $totalLinks; $j++) {
+            if ($page == $j) {
+                # code...
+                $link = $link . "<li class ='active'> $j</li>";
+            } else {
+                $link = $link . "<li><a href='$url&page=$j'> $j </a></li>";
+            }
+        }
+        return $link;
+    }
+    public function searchPage($keyword, $page, $perPage)
+    {
+        $firstLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM products 
+        WHERE `name` LIKE ? LIMIT ?, ?");
+        $keyword = "%$keyword%";
+        $sql->bind_param("sss", $keyword, $firstLink, $perPage);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
+    public function searchPagePrice($keyword, $page, $perPage)
+    {
+        $sql = self::$connection->prepare("SELECT * FROM products 
+        WHERE `price` LIKE ? LIMIT ?, ?");
+        $keyword = "%$keyword%";
+        $sql->bind_param("sss", $keyword, $firstLink, $perPage);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
     public function getProductNew()
     {
         $sql = self::$connection->prepare("SELECT * FROM products ORDER BY id DESC LIMIT 0,10");
@@ -52,58 +111,5 @@ class Product extends Db
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
-    }
-    function paginate($url, $total, $perPage, $page)
-    {
-        $totalLinks = ceil($total / $perPage);
-        $link = "";
-        for ($j = 1; $j <= $totalLinks; $j++) {
-            if ($page == $j) {
-                # code...
-                $link = $link . "<li class ='active'> $j</li>";
-            } else {
-                $link = $link . "<li><a href='$url&page=$j'> $j </a></li>";
-            }
-        }
-        return $link;
-    }
-
-    function paginateallproducts($url, $total, $perPage, $page)
-    {
-        $totalLinks = ceil($total / $perPage);
-        $link = "";
-        for ($j = 1; $j <= $totalLinks; $j++) {
-            if ($page == $j) {
-                # code...
-                $link = $link . "<li class ='active'> $j</li>";
-            } else {
-                $link = $link . "<li><a href='$url?page=$j'> $j </a></li>";
-            }
-        }
-        return $link;
-    }
-    public function searchPage($keyword, $page, $perPage)
-    {
-        $firstLink = ($page - 1) * $perPage;
-        $sql = self::$connection->prepare("SELECT * FROM products 
-        WHERE `name` LIKE ? LIMIT ?, ?");
-        $keyword = "%$keyword%";
-        $sql->bind_param("sss", $keyword, $firstLink, $perPage);
-        $sql->execute(); //return an object
-        $items = array();
-        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $items; //return an array
-    }
-
-    function getAllProductsForDividePage($page, $perPage)
-    {
-        // Tính số thứ tự trang bắt đầu 
-        $firstLink = ($page - 1) * $perPage;
-        //Dùng LIMIT để giới hạn số lượng hiển thị 1 trang
-        $sql = self::$connection->prepare("SELECT * FROM products LIMIT $firstLink, $perPage");
-        $sql -> execute(); //return an object
-        $items = array();
-        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $items; //return an array    
     }
 }
