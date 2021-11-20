@@ -58,20 +58,9 @@ class Product extends Db
     {
         $firstLink = ($page - 1) * $perPage;
         $sql = self::$connection->prepare("SELECT * FROM products 
-        WHERE `name` LIKE ? LIMIT ?, ?");
+        WHERE (`name` LIKE ? ) or (`price` LIKE ?) or (`description` LIKE ?) LIMIT ?, ?");
         $keyword = "%$keyword%";
-        $sql->bind_param("sss", $keyword, $firstLink, $perPage);
-        $sql->execute(); //return an object
-        $items = array();
-        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $items; //return an array
-    }
-    public function searchPagePrice($keyword, $page, $perPage)
-    {
-        $sql = self::$connection->prepare("SELECT * FROM products 
-        WHERE `price` LIKE ? LIMIT ?, ?");
-        $keyword = "%$keyword%";
-        $sql->bind_param("sss", $keyword, $firstLink, $perPage);
+        $sql->bind_param("sssss", $keyword, $keyword, $keyword, $firstLink, $perPage);
         $sql->execute(); //return an object
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -104,9 +93,9 @@ class Product extends Db
     public function search($keyword)
     {
         $sql = self::$connection->prepare("SELECT * FROM products 
-        WHERE `name` LIKE ?");
+        WHERE (`name` LIKE ? ) or (`price` LIKE ?) or (`description` LIKE ?)");
         $keyword = "%$keyword%";
-        $sql->bind_param("s", $keyword);
+        $sql->bind_param("sss", $keyword, $keyword, $keyword);
         $sql->execute(); //return an object
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
