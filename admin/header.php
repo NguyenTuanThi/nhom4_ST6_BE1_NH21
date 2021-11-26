@@ -233,10 +233,10 @@ $product  = new Product();
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="manufactures.php" class="nav-link">
+                            <a href="uploads.php" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Manufactures
+                                    Add product
                                 </p>
                             </a>
                         </li>
