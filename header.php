@@ -2,6 +2,7 @@
 require "config.php";
 require "models/db.php";
 require "models/product.php";
+require "models/manufacture.php";
 require "models/protype.php";
 $protype = new protype();
 $product = new Product();

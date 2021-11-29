@@ -12,4 +12,13 @@ class Product extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
+    public function addProduct($name,$manu_id,$type_id,$price,$image,$desc)
+    {
+        $sql = self::$connection->prepare("INSERT
+        INTO `products`(`name`, `manu_id`, `type_id`, `price`, `image`, `description`)
+        VALUES (?,?,?,?,?,?)");
+        $sql->bind_param("siiiiss",$name,$manu_id,$type_id,$price,$image,$desc);
+        
+        return $items; //return an object
+    }
 }
