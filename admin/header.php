@@ -2,8 +2,10 @@
 require "models/db.php";
 require "models/product.php";
 require "models/manufacture.php";
-$product  = new Product();
-$manufacture = new Manufacture();
+require "models/protype.php";
+$product = new Product();
+$manu = new Manufacture();
+$type = new Protype();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -238,7 +240,7 @@ $manufacture = new Manufacture();
                             <a href="uploads.php" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Add product
+
                                 </p>
                             </a>
                         </li>
@@ -247,6 +249,14 @@ $manufacture = new Manufacture();
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Protype
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="addproducts.php" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Add Product
                                 </p>
                             </a>
                         </li>
