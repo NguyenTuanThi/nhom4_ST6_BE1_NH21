@@ -15,18 +15,6 @@ class Product extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
-<<<<<<< HEAD
-    public function addProduct($name,$manu_id,$type_id,$price,$image,$desc)
-    {
-        $sql = self::$connection->prepare("INSERT
-        INTO `products`(`name`, `manu_id`, `type_id`, `price`, `image`, `description`)
-        VALUES (?,?,?,?,?,?)");
-        $sql->bind_param("siiiiss",$name,$manu_id,$type_id,$price,$image,$desc);
-        
-        return $items; //return an object
-    }
-}
-=======
     public function addProduct($name, $manu_id, $type_id, $price,  $image, $desc, $feature, $created_at)
     {
         $sql = self::$connection->prepare("INSERT 
@@ -39,4 +27,3 @@ class Product extends Db
         return $sql->execute(); //return an object
     }
 }
->>>>>>> d29c91a74756f8d0152b83540c82687d688069b3

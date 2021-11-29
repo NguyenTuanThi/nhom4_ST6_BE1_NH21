@@ -53,8 +53,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        $getAllManufacture = $manufacture->getAllManu();
-
+                        $getAllManufacture = $manu->getAllManu();
                         foreach ($getAllManufacture as $value) :
                         ?>
                             <tr>
@@ -65,7 +64,7 @@
                                 </td>
                                 <td>
                                     <?php
-                                    $getAllPro = $manufacture->getManutByPrId($value['manu_id']);
+                                    $getAllPro = $manu->getManutByPrId($value['manu_id']);
                                     echo count($getAllPro);
                                     ?>
                                 </td>

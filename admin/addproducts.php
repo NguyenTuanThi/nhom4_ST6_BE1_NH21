@@ -21,7 +21,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <form action="add.php" method="post" enctype="multipart/form-data">
+    <form action="adding-process-product.php" method="post" enctype="multipart/form-data">
       <div class="row">
         <div class="col-md-12">
           <div class="card card-primary">
