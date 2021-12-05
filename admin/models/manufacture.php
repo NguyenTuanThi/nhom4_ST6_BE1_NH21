@@ -19,7 +19,6 @@ class Manufacture extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
-
     public function getQtyByManuId($manu_id)
     {
         $sql = self::$connection->prepare("SELECT * FROM manufactures WHERE manu_id = ?");
@@ -38,4 +37,3 @@ class Manufacture extends Db
         return $sql->execute(); //return an object
     }
 }
-?>
