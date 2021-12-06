@@ -20,9 +20,9 @@
   </section>
   <!-- Main content -->
   <?php
-  if (isset($_GET['id'])) :
-    $id = $_GET['id'];
-    $getProductById = $product->getProductById($id);
+  if (isset($_GET['manu_id'])) :
+    $id = $_GET['manu_id'];
+    $getManu = $manu->getManutByPrId($id);
     foreach ($getProductById as $values) : ?>
       <section class="content">
         <form action="update.php?id=<?php echo $values['id'] ?>" method="post" enctype="multipart/form-data">
