@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    # code...
+    header('location:../login/index.php');
+}
 class Db
 {
     public static $connection;
