@@ -43,7 +43,7 @@ class Product extends Db
     public function updateProduct($name, $manu_id, $type_id, $price, $image, $desc, $feature, $id)
     {
         $sql = self::$connection->prepare("UPDATE Products 
-        set `name`= ?,`manu_id`= ?,`type_id`= ?, `price`= ?, `image`= ?,`desc`= ?,`feature`= ? 
+        set `name`= ?,`manu_id`= ?,`type_id`= ?, `price`= ?, `image`= ?,`description`= ?,`feature`= ? 
         Where `id`= ?");
         var_dump("UPDATE Products 
         set `name`= $name,`manu_id`= $manu_id,`type_id`= $type_id,`price`= $price,`image`= $image,`description`= $desc,`feature`= $feature
