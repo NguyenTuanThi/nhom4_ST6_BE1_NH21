@@ -9,11 +9,11 @@
             <div class="col-md-12">
                 <ul class="breadcrumb-tree">
                     <li><a href="#">Home</a></li>
-					
+
                     <li><a href="#">All Categories</a></li>
-					
+
                     <li><a href="#">Accessories</a></li>
-					
+
                     <li class="active">Headphones (227,490 Results)</li>
                 </ul>
             </div>
@@ -245,7 +245,7 @@
                     if (isset($_GET['type_id'])) :
                         $type_id = $_GET['type_id'];
                         $getProductsByType = $product->getProductsByType($type_id);
-                        
+
                         foreach ($getProductsByType as $value) :
                     ?>
                     <div class="col-md-4 col-xs-6">
@@ -260,8 +260,7 @@
                             <div class="product-body">
                                 <p class="product-category">Category</p>
                                 <h3 class="product-name"><a href="#"><?php echo $value['name'] ?></a></h3>
-                                <h4 class="product-price">$980.000 VND <del
-                                        class="product-old-price"><?php echo number_format($value['price']) ?>VND</del>
+                                <h4 class="product-price"><?php echo number_format($value['price']) ?>VND
                                 </h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -290,7 +289,7 @@
                 </div>
                 <!-- /store products -->
 
-                
+
                 <?php endif; ?>
             </div>
             <!-- /STORE -->

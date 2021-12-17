@@ -95,7 +95,7 @@ class Product extends Db
         $sql = self::$connection->prepare("SELECT * FROM products 
         WHERE (`name` LIKE ? ) or (`price` LIKE ?) or (`description` LIKE ?)");
         $keyword = "%$keyword%";
-        $sql->bind_param("sss", $keyword, $keyword, $keyword);
+        $sql->bind_param("sis", $keyword, $keyword, $keyword);
         $sql->execute(); //return an object
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
