@@ -2,7 +2,6 @@
 require "config.php";
 require "models/db.php";
 require "models/product.php";
-require "models/manufacture.php";
 require "models/protype.php";
 $protype = new protype();
 $product = new Product();
@@ -66,7 +65,7 @@ $getProductById = $product->getProductById(3);
                 </ul>
                 <ul class="header-links pull-right">
                     <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                    <li><a href="login/index.php"><i class="fa fa-user-o"></i> My Account</a></li>
                 </ul>
             </div>
         </div>
@@ -89,16 +88,17 @@ $getProductById = $product->getProductById(3);
                     <!-- /LOGO -->
 
                     <!-- SEARCH BAR -->
-                    <div class="col-md-6">
+                    <div class="col-md-6 text-center">
                         <div class="header-search">
                             <form method="get" action="result.php" name="searchcol">
-                                <select class="input-select">
+                                <!-- <select class="input-select">
                                     <option value="1">Name</option>
                                     <option value="2">Description</option>
                                     <option value="3">Price</option>
-                                </select>
-                                <input name="keyword" class="input" placeholder="Search here">
-                                <button type="submit" class="search-btn">Search</button>
+                                </select> -->
+                                <input name="keyword" value="<?= isset($_GET['keyword']) ? $_GET['keyword'] : "" ?>"
+                                    class="input" placeholder="Search here">
+                                <button type="submit" name="submit" class="search-btn">Search</button>
                             </form>
                         </div>
                     </div>
@@ -153,8 +153,8 @@ $getProductById = $product->getProductById(3);
                                         <h5>SUBTOTAL: $2940.00</h5>
                                     </div>
                                     <div class="cart-btns">
-                                        <a href="#">View Cart</a>
-                                        <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                                        <a href="viewcart.php">View Cart</a>
+                                        <a href="checkout.php">Checkout <i class="fa fa-arrow-circle-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -192,9 +192,10 @@ $getProductById = $product->getProductById(3);
                     $getAllProtype = $protype->getAllProtype();
                     foreach ($getAllProtype as $value) :
                     ?>
-                        <li>
-                            <a href="products.php?type_id=<?php echo $value['type_id'] ?>"><?php echo $value['type_name'] ?></a>
-                        </li>
+                    <li>
+                        <a
+                            href="products.php?type_id=<?php echo $value['type_id'] ?>"><?php echo $value['type_name'] ?></a>
+                    </li>
                     <?php
                     endforeach;
                     ?>
