@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
-    # code...
+if (!isset($_SESSION['role'])) {
+    # code...    
     header('location:../login/index.php');
 }
 class Db

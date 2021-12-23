@@ -3,9 +3,19 @@ require "models/db.php";
 require "models/product.php";
 require "models/manufacture.php";
 require "models/protype.php";
+require "models/user.php";
+require "models/bill.php";
+require "models/cart.php";
+require "models/wish.php";
+require "models/order_detail.php";
 $product = new Product();
 $manu = new Manufacture();
 $type = new Protype();
+$user = new User();
+$bill = new Bill();
+$cart = new Cart();
+$wish = new Wishlist();
+$detail = new Order_Detail();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,15 +46,17 @@ $type = new Protype();
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="../../../plugins/summernote/summernote-bs4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        <!-- Preloader
+        <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-        </div> -->
+        </div>
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -185,6 +197,12 @@ $type = new Protype();
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
+                <li>
+                    <button class="btn btn-navbar" type="button">
+                        <a href="../login/index.php">LOGOUT</a>
+                    </button>
+
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -237,36 +255,120 @@ $type = new Protype();
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="products.php" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="fab fa-product-hunt"></i>
                                 <p>
                                     Products
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="products.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View Products</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="addproducts.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Products</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="fab fa-mastodon"></i>
+                                <p>
+                                    Manufactures
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="manufactures.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View Manufactures</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="addmanufactures.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Manufactures</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="fab fa-tumblr-square"></i>
+                                <p>
+                                    Protypes
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="protypes.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View Protypes</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="addprotypes.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add Protypes</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-shopping-bag"></i>
+                                <p>
+                                    Order_Bill
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="bills1.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>New Order</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="bills2.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Transport</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="bills3.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Delivered</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="users.php" class="nav-link">
+                                <i class="fas fa-user"></i>
+                                <p>User</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="uploads.php" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-
-                                </p>
+                            <a href="carts.php" class="nav-link">
+                                <i class="fas fa-shopping-cart"></i>
+                                <p>Cart</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="protypes.php" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Protype
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="addproducts.php" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Add Product
-                                </p>
+                            <a href="wishlist.php" class="nav-link">
+                                <i class="fas fa-shopping-cart"></i>
+                                <p>Wishlist</p>
                             </a>
                         </li>
                     </ul>

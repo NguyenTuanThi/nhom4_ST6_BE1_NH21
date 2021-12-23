@@ -11,8 +11,21 @@ class Product extends Db
     }
     public function getProductById($id)
     {
-        $sql = self::$connection->prepare("SELECT * FROM products WHERE id = ?");
+        $sql = self::$connection->prepare("SELECT * 
+        FROM `products`,`manufactures`,`protypes`
+        WHERE `products`.`manu_id` = `manufactures`.`manu_id`
+        AND `products`.`type_id` = `protypes`.`type_id` 
+        and id = ?");
         $sql->bind_param("i", $id);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
+    public function getProductByName($name)
+    {
+        $sql = self::$connection->prepare("SELECT * FROM products WHERE `name` = ?");
+        $sql->bind_param("s", $name);
         $sql->execute(); //return an object
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -101,4 +114,16 @@ class Product extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items; //return an array
     }
+
+    // public function search($searchcol, $keyword)
+    // {
+    //     $sql = self::$connection->prepare("SELECT * FROM products 
+    //     WHERE (`name` LIKE ? ) or (`price` LIKE ?) or (`description` LIKE ?)");
+    //     $keyword = "%$keyword%";
+    //     $sql->bind_param("sss", $keyword, $keyword, $keyword);
+    //     $sql->execute(); //return an object
+    //     $items = array();
+    //     $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+    //     return $items; //return an array
+    // }
 }
