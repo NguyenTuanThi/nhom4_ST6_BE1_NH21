@@ -9,8 +9,8 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $role = 2;
-    $repeat = $_POST['repeat'];
-    if ($repeat == $password) {
+    $confirm = $_POST['confirm'];
+    if ($confirm == $password) {
         # code...
         if ($user->checkUser($username)) {
             echo "k tc";
@@ -22,6 +22,16 @@ if (isset($_POST['submit'])) {
         }
     } else {
         # code...
+        // header('location:register.php');
         echo ("Mật khẩu không trùng khớp");
+
+?>
+
+<script>
+alert("Mật khẩu không khớp");
+</script>
+
+<?php
+
     }
 }

@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Projects</h1>
+                    <h1>Manufacture</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -20,7 +20,7 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content" style="padding-right: 550px;">
 
         <!-- Default box -->
         <div class="card">
@@ -40,45 +40,41 @@
                 <table class="table table-striped projects">
                     <thead>
                         <tr>
-                            <th style="width: 1%">
+                            <th style="width: 50% text-center">
                                 ID
                             </th>
-                            <th style="width: 20%">
+                            <th style="width: 50% text-center">
                                 Name
                             </th>
                             <th style="width: 8% ">
-                                Qty
+                                Action
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $getAllManufacture = $manu->getAllManu();
-                        foreach ($getAllManufacture as $value) :
+                        $getAllManu = $manu->getAllManu();
+                        foreach ($getAllManu as $value) :
                         ?>
-                            <tr>
-                                <td>
-                                    <?php echo $value['manu_id'] ?>
-                                </td>
-                                <td><?php echo $value['manu_name'] ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    $getAllPro = $manu->getManutByPrId($value['manu_id']);
-                                    echo count($getAllPro);
-                                    ?>
-                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-info btn-sm" href="#">
-                                        <i class="fas fa-pencil-alt"> </i>
-                                        Edit
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash"> </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                <?php echo $value['manu_id'] ?>
+                            </td>
+                            <td><?php echo $value['manu_name'] ?>
+                            </td>
+                            <td class="project-actions text-right">
+                                <a class="btn btn-info btn-sm"
+                                    href="updatemanufactures.php?id=<?php echo $value['manu_id'] ?>">
+                                    <i class="fas fa-pencil-alt"> </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" href="delmanu1.php?id=<?php echo $value['manu_id'] ?>">
+                                    <i class="fas fa-trash"> </i>
+                                    Delete
+                                </a>
+
+                            </td>
+                        </tr>
                         <?php endforeach;
                         ?>
                     </tbody>

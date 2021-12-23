@@ -1,4 +1,5 @@
 <?php
+
 class Db
 {
     public static $connection;
@@ -11,4 +12,3 @@ class Db
         return self::$connection;
     }
 }
-?>
